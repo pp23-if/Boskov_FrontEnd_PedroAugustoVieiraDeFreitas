@@ -1,0 +1,82 @@
+/* Fundo da página */
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5dc; /* bege claro */
+}
+
+/* Card de login */
+.login-card {
+  background-color: #fff8dc; /* cor que combina com bege claro */
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  font-family: 'Georgia', serif; /* estilo de fonte tipo cinema */
+}
+
+/* Título */
+.login-title {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+/* Inputs */
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+form input {
+  width: 93%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-family: 'Georgia', serif;
+}
+
+/* Botão */
+form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #90ee90; /* verde claro */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #76d076;
+}
+
+.error small {
+  color: red;
+  font-size: 12px;
+  margin-top: -10px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.cadastro-link {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.cadastro-link a {
+  color: #006400; /* verde escuro */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cadastro-link a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,27 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="login-title">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" />
+      <div class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+        <small *ngIf="loginForm.get('email')?.errors?.['required']">Email é obrigatório.</small>
+        <small *ngIf="loginForm.get('email')?.errors?.['email']">Email inválido.</small>
+      </div>
+
+      <label for="password">Senha</label>
+      <input id="password" type="password" formControlName="password" />
+      <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+        <small>Senha é obrigatória.</small>
+      </div>
+
+      <button type="submit">Entrar</button>
+    </form>
+    <p class="cadastro-link">
+      Ainda não tem conta?
+      <a routerLink="/cadastro">Cadastre-se aqui</a>
+    </p>
+
+  </div>
+</div>

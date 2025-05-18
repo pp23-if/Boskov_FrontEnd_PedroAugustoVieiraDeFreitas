@@ -1,0 +1,56 @@
+<div class="login-container">
+    <div class="login-card">
+        <h2 class="login-title">Cadastro</h2>
+        <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" formControlName="nome" />
+            <div class="error" *ngIf="cadastroForm.get('nome')?.touched && cadastroForm.get('nome')?.invalid">
+                <small>Nome é obrigatório.</small>
+            </div>
+
+            <label for="apelido">Apelido</label>
+            <input id="apelido" type="text" formControlName="apelido" />
+            <div class="error" *ngIf="cadastroForm.get('apelido')?.touched && cadastroForm.get('apelido')?.invalid">
+                <small>Apelido é obrigatório.</small>
+            </div>
+
+
+            <label for="email">Email</label>
+            <input id="email" type="email" formControlName="email" />
+            <div class="error" *ngIf="cadastroForm.get('email')?.touched && cadastroForm.get('email')?.invalid">
+                <small *ngIf="cadastroForm.get('email')?.errors?.['required']">Email é obrigatório.</small>
+                <small *ngIf="cadastroForm.get('email')?.errors?.['email']">Email inválido.</small>
+            </div>
+
+            <label for="senha">Senha</label>
+            <input id="senha" type="password" formControlName="senha" />
+            <div class="error" *ngIf="cadastroForm.get('senha')?.touched && cadastroForm.get('senha')?.invalid">
+                <small *ngIf="cadastroForm.get('senha')?.errors?.['required']">Senha é obrigatória.</small>
+                <small *ngIf="cadastroForm.get('senha')?.errors?.['minlength']">Mínimo de 6 caracteres.</small>
+            </div>
+
+            <label for="data_nascimento">Data de Nascimento</label>
+            <input id="data_nascimento" type="date" formControlName="data_nascimento" />
+            <div class="error"
+                *ngIf="cadastroForm.get('data_nascimento')?.touched && cadastroForm.get('data_nascimento')?.invalid">
+                <small>Data de nascimento é obrigatória.</small>
+            </div>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <p class="cadastro-link">
+            Já tem conta?
+            <a routerLink="/login">Voltar ao login</a>
+        </p>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="showModal">
+    <div class="modal">
+        <p>{{ modalMessage }}</p>
+        <button (click)="closeModal()">OK</button>
+    </div>
+</div>
