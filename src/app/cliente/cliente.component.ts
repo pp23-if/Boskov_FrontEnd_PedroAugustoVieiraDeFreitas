@@ -26,7 +26,17 @@ export class ClienteComponent implements OnInit {
   filmesPorPagina: number = 12;
   totalPaginas: number = 1;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  modalAberto = false;
+  filmeSelecionado: any = null;
+  notaSelecionada: number = 0;
+  comentario: string = '';
+
+  modalSucessoAberto: boolean = false;
+  modalJaAvaliadoAberto: boolean = false;
+  modalErroAberto: boolean = false;
+  modalCamposObrigatoriosAberto: boolean = false;
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
@@ -40,7 +50,7 @@ export class ClienteComponent implements OnInit {
     this.http.get<any[]>('http://localhost:3000/api/filme/busca_filmes').subscribe({
       next: data => {
         this.filmes = data;
-        this.filmesFiltrados = [...this.filmes]; // inicia com todos
+        this.filmesFiltrados = [...this.filmes];
         this.atualizarPaginacao();
       },
       error: err => console.error('Erro ao buscar filmes:', err)
@@ -58,14 +68,9 @@ export class ClienteComponent implements OnInit {
 
   filtrarPorNome() {
     const termo = this.termoBusca.trim().toLowerCase();
-
-    if (termo) {
-      this.filmesFiltrados = this.filmes.filter(f =>
-        f.nome.toLowerCase().includes(termo)
-      );
-    } else {
-      this.filmesFiltrados = [...this.filmes];
-    }
+    this.filmesFiltrados = termo
+      ? this.filmes.filter(f => f.nome.toLowerCase().includes(termo))
+      : [...this.filmes];
 
     this.paginaAtual = 1;
     this.atualizarPaginacao();
@@ -78,7 +83,7 @@ export class ClienteComponent implements OnInit {
     this.http.get<any[]>(url).subscribe({
       next: data => {
         this.filmesFiltrados = data;
-        this.termoBusca = ''; // limpa o campo de nome pois a busca agora é por gênero
+        this.termoBusca = '';
         this.paginaAtual = 1;
         this.atualizarPaginacao();
       },
@@ -123,11 +128,74 @@ export class ClienteComponent implements OnInit {
   }
 
   limparFiltros() {
-  this.termoBusca = '';
-  this.generoSelecionado = '';
-  this.getFilmes(); // Recarrega todos os filmes
-}
+    this.termoBusca = '';
+    this.generoSelecionado = '';
+    this.getFilmes();
+  }
 
+  abrirModal(filme: any) {
+    this.filmeSelecionado = filme;
+    this.modalAberto = true;
+    this.notaSelecionada = 0;
+    this.comentario = '';
+  }
+
+  fecharModal() {
+    this.modalAberto = false;
+    this.filmeSelecionado = null;
+    this.notaSelecionada = 0;
+    this.comentario = '';
+  }
+
+  publicarAvaliacao() {
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    const token = localStorage.getItem('token');
+
+    if (!this.notaSelecionada || !this.comentario.trim()) {
+      this.modalCamposObrigatoriosAberto = true;
+      return;
+    }
+
+    const id_usuario = parseInt(usuario.id, 10);
+    const id_filme = parseInt(this.filmeSelecionado.id, 10);
+
+    if (isNaN(id_usuario) || isNaN(id_filme)) {
+      return;
+    }
+
+    const body = {
+      id_usuario,
+      id_filme,
+      nota: this.notaSelecionada,
+      comentario: this.comentario
+    };
+
+    this.http.post('http://localhost:3000/api/avaliacao/cadastro', body, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).subscribe({
+      next: () => {
+        this.modalSucessoAberto = true;
+        // Não fecha o modal do filme aqui
+      },
+      error: err => {
+        if (err.status === 400) {
+          this.modalJaAvaliadoAberto = true;
+        } else {
+          this.modalErroAberto = true;
+        }
+        // Não fecha o modal do filme aqui
+      }
+    });
+  }
+
+  fecharModalFeedback() {
+    this.modalSucessoAberto = false;
+    this.modalJaAvaliadoAberto = false;
+    this.modalErroAberto = false;
+    this.modalCamposObrigatoriosAberto = false;
+  }
 
   logout() {
     localStorage.clear();

@@ -11,14 +11,10 @@
             </option>
         </select>
 
-        <button (click)="buscarPorGenero()" title="Buscar por gênero">
-            🔍
-        </button>
-
-         <button (click)="limparFiltros()" title="Limpar filtros">
-            ❌
-        </button>
+        <button (click)="buscarPorGenero()" title="Buscar por gênero">🔍</button>
+        <button (click)="limparFiltros()" title="Limpar filtros">❌</button>
     </div>
+
     <div class="navbar-links">
         <a routerLink="/cliente/meus-dados">Meus Dados</a>
         <a routerLink="/cliente/minhas-avaliacoes">Minhas Avaliações</a>
@@ -29,7 +25,7 @@
 
 <div class="filmes-container">
     <div class="cards-wrapper">
-        <div class="card" *ngFor="let filme of filmesPaginados">
+        <div class="card" *ngFor="let filme of filmesPaginados" (click)="abrirModal(filme)">
             <img [src]="filme.poster" (error)="onImageError($event)" alt="{{ filme.nome }}" />
             <div class="card-content">
                 <h3 title="{{ filme.nome }}">{{ filme.nome | slice:0:30 }}{{ filme.nome.length > 30 ? '...' : '' }}</h3>
@@ -49,3 +45,52 @@
         <button (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">Próxima</button>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal" [class.show]="modalAberto">
+    <div class="modal-content">
+        <span class="close" (click)="fecharModal()">&times;</span>
+
+        <h2>{{ filmeSelecionado?.nome }}</h2>
+
+        <!-- Poster -->
+        <img *ngIf="filmeSelecionado?.poster" [src]="filmeSelecionado?.poster" alt="{{ filmeSelecionado?.nome }}"
+            class="modal-poster" />
+
+        <div class="film-details">
+            <p><strong>Classificação Indicativa:</strong> {{ filmeSelecionado?.classificacao }}</p>
+            <p><strong>Data de Lançamento:</strong> {{ filmeSelecionado?.ano_lancamento | date: 'dd/MM/yyyy' }}</p>
+            <p><strong>Sinopse:</strong> {{ filmeSelecionado?.sinopse }}</p>
+            <p><strong>Duração:</strong> {{ filmeSelecionado?.duracao }} minutos</p>
+            <p><strong>Diretor:</strong> {{ filmeSelecionado?.diretor }}</p>
+            <p><strong>Produtora:</strong> {{ filmeSelecionado?.produtora }}</p>
+        </div>
+
+        <!-- Estrelas -->
+        <div class="avaliacao">
+            <label><strong>Nota:</strong></label>
+            <span *ngFor="let star of [1,2,3,4,5]" (click)="notaSelecionada = star"
+                [class.selected]="star <= notaSelecionada">★</span>
+        </div>
+
+        <!-- Comentário -->
+        <textarea [(ngModel)]="comentario" rows="4" placeholder="Escreva seu comentário..." maxlength="300"></textarea>
+
+        <!-- Botões -->
+        <div class="modal-buttons">
+            <button (click)="publicarAvaliacao()">Publicar Avaliação</button>
+            <button (click)="fecharModal()">Cancelar</button>
+        </div>
+        <!-- Feedbacks internos centralizados -->
+        <div class="modal-feedback-overlay"
+            *ngIf="modalSucessoAberto || modalJaAvaliadoAberto || modalErroAberto || modalCamposObrigatoriosAberto">
+            <div class="modal-feedback-box">
+                <p *ngIf="modalSucessoAberto">Avaliação publicada com sucesso!</p>
+                <p *ngIf="modalJaAvaliadoAberto">Você já avaliou este filme.</p>
+                <p *ngIf="modalErroAberto">Ocorreu um erro ao publicar a avaliação. Tente novamente.</p>
+                <p *ngIf="modalCamposObrigatoriosAberto" class="alerta">Por favor, selecione uma nota e escreva um
+                    comentário.</p>
+
+                <button (click)="fecharModalFeedback()">Fechar</button>
+            </div>
+        </div>
