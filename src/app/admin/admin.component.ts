@@ -208,6 +208,8 @@ export class AdminComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
-  }
+  this.authService.logout();
+  window.location.href = '/login'; // Redireciona para a página de login
+}
+
 }

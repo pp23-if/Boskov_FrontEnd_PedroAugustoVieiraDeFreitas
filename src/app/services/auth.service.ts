@@ -29,9 +29,11 @@ export class AuthService {
 
 
   logout() {
-    localStorage.clear();
-    this.router.navigate(['/login']);
-  }
+  localStorage.clear();
+  sessionStorage.clear();
+  localStorage.setItem('logout-event', Date.now().toString());
+}
+
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
