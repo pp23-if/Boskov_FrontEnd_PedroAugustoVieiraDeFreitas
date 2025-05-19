@@ -1,1 +1,51 @@
-<p>Tela de CLIENTE</p>
+<nav class="navbar">
+    <div class="navbar-user">{{ apelidoUsuario }}</div>
+
+    <div class="navbar-search">
+        <input type="text" placeholder="Buscar por nome..." [(ngModel)]="termoBusca" (input)="filtrarPorNome()" />
+
+        <select [(ngModel)]="generoSelecionado">
+            <option value="">Selecionar gênero</option>
+            <option *ngFor="let genero of generos" [value]="genero.descricao">
+                {{ genero.descricao }}
+            </option>
+        </select>
+
+        <button (click)="buscarPorGenero()" title="Buscar por gênero">
+            🔍
+        </button>
+
+         <button (click)="limparFiltros()" title="Limpar filtros">
+            ❌
+        </button>
+    </div>
+    <div class="navbar-links">
+        <a routerLink="/cliente/meus-dados">Meus Dados</a>
+        <a routerLink="/cliente/minhas-avaliacoes">Minhas Avaliações</a>
+        <a routerLink="/cliente/outras-avaliacoes">Outras Avaliações</a>
+        <button (click)="logout()">Sair</button>
+    </div>
+</nav>
+
+<div class="filmes-container">
+    <div class="cards-wrapper">
+        <div class="card" *ngFor="let filme of filmesPaginados">
+            <img [src]="filme.poster" (error)="onImageError($event)" alt="{{ filme.nome }}" />
+            <div class="card-content">
+                <h3 title="{{ filme.nome }}">{{ filme.nome | slice:0:30 }}{{ filme.nome.length > 30 ? '...' : '' }}</h3>
+                <p title="{{ filme.sinopse }}">{{ filme.sinopse | slice:0:100 }}{{ filme.sinopse.length > 100 ? '...' :
+                    '' }}</p>
+                <span>{{ filme.ano_lancamento | date: 'yyyy' }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="paginacao">
+        <button (click)="paginaAnterior()" [disabled]="paginaAtual === 1">Anterior</button>
+        <button *ngFor="let page of totalPaginasArray" (click)="irParaPagina(page)"
+            [class.active]="page === paginaAtual">
+            {{ page }}
+        </button>
+        <button (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">Próxima</button>
+    </div>
+</div>
