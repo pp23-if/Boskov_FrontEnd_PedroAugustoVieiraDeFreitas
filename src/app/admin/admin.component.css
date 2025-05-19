@@ -1,0 +1,223 @@
+/* Navbar */
+.navbar {
+  background-color: #fff8dc;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Georgia', serif;
+}
+
+.btn-sair {
+  background: none;
+  border: none;
+  color: #006400;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Container geral */
+.admin-container {
+  padding: 2rem;
+  background-color: #f5f5dc;
+  min-height: 100vh;
+  font-family: 'Georgia', serif;
+}
+
+/* Estilo da tabela */
+.tabela-usuarios {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff8dc;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.tabela-usuarios thead {
+  background-color: #f0e68c;
+}
+
+.tabela-usuarios th,
+.tabela-usuarios td {
+  padding: 12px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.tabela-usuarios tr:hover {
+  background-color: #fafad2;
+}
+
+/* Botões */
+.btn-acao {
+  margin-right: 0.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1rem;
+}
+
+.btn-acao:hover {
+  opacity: 0.8;
+}
+
+.btn-adicionar {
+  margin-top: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #90ee90;
+  color: white;
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-adicionar:hover {
+  background-color: #76d076;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Faz as colunas terem largura fixa */
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  word-wrap: break-word; /* Quebra as palavras longas */
+  white-space: normal;   /* Permite quebra de linha */
+  overflow-wrap: break-word;
+}
+
+.botao-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal card */
+.modal-card {
+  background-color: #fff8dc;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  width: 350px;
+  font-family: 'Georgia', serif;
+}
+
+/* Modal title */
+.modal-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+
+/* Form inputs */
+.modal-card form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.modal-card form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-family: 'Georgia', serif;
+}
+
+/* Ações */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 10px;
+  background-color: #90ee90;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-actions .btn-cancelar {
+  background-color: #d3d3d3;
+  color: #333;
+}
+
+.modal-actions button:hover {
+  opacity: 0.9;
+}
+
+/* Erros */
+.error small {
+  color: red;
+  font-size: 12px;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.modal-overlay-Feedback {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-Feedback {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  text-align: center;
+  font-family: 'Georgia', serif;
+}
+
+.modal-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #90ee90;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-button:hover {
+  background-color: #76d076;
+}
+
+

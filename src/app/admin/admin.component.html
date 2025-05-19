@@ -1,0 +1,135 @@
+<nav class="navbar">
+    <div><strong>ADMIN - {{ apelidoUsuario }}</strong></div>
+    <button class="btn-sair" (click)="logout()">Sair</button>
+</nav>
+
+<div class="admin-container">
+    <table class="tabela-usuarios">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Apelido</th>
+                <th>Data Nasc.</th>
+                <th>Tipo</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios">
+                <td>{{ usuario.nome }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.apelido }}</td>
+                <td>{{ usuario.data_nascimento | date:'dd/MM/yyyy' }}</td>
+                <td>{{ usuario.tipo_usuario }}</td>
+                <td>{{ statusLabel(usuario.status) }}</td>
+                <td>
+                    <button class="btn-acao" (click)="abrirEditarSenhaModal(usuario)">✏️</button>
+
+                    <button class="btn-acao" (click)="desativarUsuario(usuario)">
+                        🗑️
+                    </button>
+
+                    <button class="btn-acao" (click)="reativarUsuario(usuario)">
+                        🔁
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="botao-container">
+        <button class="btn-adicionar" (click)="adicionarUsuario()">+</button>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div *ngIf="showCadastroModal" class="modal-overlay">
+        <div class="modal-card">
+            <h2 class="modal-title">Novo Usuário</h2>
+            <form [formGroup]="cadastroForm" (ngSubmit)="salvarUsuario()">
+                <label>Nome</label>
+                <input formControlName="nome" type="text" />
+                <div *ngIf="cadastroForm.get('nome')?.invalid && cadastroForm.get('nome')?.touched" class="error">
+                    <small>Nome é obrigatório</small>
+                </div>
+
+                <label>Apelido</label>
+                <input formControlName="apelido" type="text" />
+                <div *ngIf="cadastroForm.get('apelido')?.invalid && cadastroForm.get('apelido')?.touched" class="error">
+                    <small>Apelido é obrigatório</small>
+                </div>
+
+                <label>Email</label>
+                <input formControlName="email" type="email" />
+                <div *ngIf="cadastroForm.get('email')?.invalid && cadastroForm.get('email')?.touched" class="error">
+                    <small>Email inválido ou obrigatório</small>
+                </div>
+
+                <label>Senha</label>
+                <input formControlName="senha" type="password" />
+                <div *ngIf="cadastroForm.get('senha')?.invalid && cadastroForm.get('senha')?.touched" class="error">
+                    <small>Senha é obrigatória (mínimo 6 caracteres)</small>
+                </div>
+
+                <label>Data de Nascimento</label>
+                <input formControlName="data_nascimento" type="date" />
+                <div *ngIf="cadastroForm.get('data_nascimento')?.invalid && cadastroForm.get('data_nascimento')?.touched"
+                    class="error">
+                    <small>Data de nascimento é obrigatória</small>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit">Salvar</button>
+                    <button type="button" class="btn-cancelar" (click)="fecharModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Feedback -->
+    <div *ngIf="showMensagemModal" class="modal-overlay-Feedback">
+        <div class="modal-Feedback">
+            <p class="modal-title">{{ mensagemModal }}</p>
+            <button class="modal-button" (click)="fecharMensagemModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Modal de Edição de Senha -->
+    <div *ngIf="showEditarSenhaModal" class="modal-overlay">
+        <div class="modal-card">
+            <h2 class="modal-title">Atualizar Senha</h2>
+            <form [formGroup]="senhaForm" (ngSubmit)="salvarNovaSenha()">
+                <label>Nova Senha</label>
+                <input formControlName="senha" type="password" />
+                <div *ngIf="senhaForm.get('senha')?.invalid && senhaForm.get('senha')?.touched" class="error">
+                    <small>Senha é obrigatória (mínimo 6 caracteres)</small>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit">Atualizar</button>
+                    <button type="button" class="btn-cancelar" (click)="fecharEditarSenhaModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Feedback da Senha -->
+    <div *ngIf="showFeedbackSenhaModal" class="modal-overlay-Feedback">
+        <div class="modal-Feedback">
+            <p class="modal-title">{{ mensagemSenhaModal }}</p>
+            <button class="modal-button" (click)="fecharFeedbackSenhaModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Modal de Feedback para Desativar/Reativar -->
+    <div *ngIf="showStatusModal" class="modal-overlay-Feedback">
+        <div class="modal-Feedback">
+            <p class="modal-title">{{ mensagemStatusModal }}</p>
+            <button class="modal-button" (click)="fecharStatusModal()">OK</button>
+        </div>
+    </div>
+
+
+
+</div>

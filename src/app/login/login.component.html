@@ -23,5 +23,14 @@
       <a routerLink="/cadastro">Cadastre-se aqui</a>
     </p>
 
+
+    <div *ngIf="errorMessage" class="modal-overlay">
+      <div class="modal">
+        <p>{{ errorMessage }}</p>
+        <button (click)="errorMessage = null">Fechar</button>
+      </div>
+    </div>
+
+
   </div>
 </div>
