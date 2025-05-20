@@ -16,6 +16,6 @@ bootstrapApplication(AppComponent, {
       multi: true
     },
     provideRouter(routes),
-    importProvidersFrom(FormsModule) // 👈 Importa FormsModule para ngModel funcionar
+    importProvidersFrom(FormsModule)
   ]
 });

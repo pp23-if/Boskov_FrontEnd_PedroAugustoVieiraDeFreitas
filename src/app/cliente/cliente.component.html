@@ -1,6 +1,6 @@
+
 <nav class="navbar">
     <div class="navbar-user">{{ apelidoUsuario }}</div>
-
     <div class="navbar-search">
         <input type="text" placeholder="Buscar por nome..." [(ngModel)]="termoBusca" (input)="filtrarPorNome()" />
 
@@ -16,6 +16,7 @@
     </div>
 
     <div class="navbar-links">
+        <a routerLink="/cliente">Home</a>
         <a routerLink="/cliente/meus-dados">Meus Dados</a>
         <a routerLink="/cliente/minhas-avaliacoes">Minhas Avaliações</a>
         <a routerLink="/cliente/outras-avaliacoes">Outras Avaliações</a>
@@ -45,7 +46,6 @@
         <button (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">Próxima</button>
     </div>
 </div>
-
 <!-- Modal -->
 <div class="modal" [class.show]="modalAberto">
     <div class="modal-content">

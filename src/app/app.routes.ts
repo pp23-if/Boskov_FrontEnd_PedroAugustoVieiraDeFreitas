@@ -1,15 +1,36 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
 import { LoginComponent } from './login/login.component';
-import { CadastroComponent } from './cadastro/cadastro.component';
 import { ClienteComponent } from './cliente/cliente.component';
-import { AdminComponent } from './admin/admin.component';
-import { authGuard } from './services/auth.guard'; // ajuste o path
+import { AvaliacoesComponent } from './avaliacoes/avaliacoes.component';
+import { AdminComponent } from './admin/admin.component'; // Adicione este import, ajuste o caminho se necessário
+import { CadastroComponent } from './cadastro/cadastro.component'; // Adicione este import, ajuste o caminho se necessário
+
+import { authGuard } from './services/auth.guard'; // ajuste o caminho se necessário
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: CadastroComponent },
+  
   {
     path: 'cliente',
+    component: ClienteComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'cliente/minhas-avaliacoes',
+    component: AvaliacoesComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'cliente/meus-dados',
+    component: ClienteComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'cliente/outras-avaliacoes',
     component: ClienteComponent,
     canActivate: [authGuard]
   },
@@ -18,5 +39,12 @@ export const routes: Routes = [
     component: AdminComponent,
     canActivate: [authGuard]
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  { path: '**', redirectTo: 'login' }
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}

@@ -1,0 +1,225 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff8dc;
+  color: black;
+  flex-wrap: wrap;
+}
+
+.navbar-user {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-links a,
+.navbar-links button {
+  text-decoration: none;
+  color: #006400;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+.navbar-links a:hover,
+.navbar-links button:hover {
+  text-decoration: underline;
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.navbar-search input,
+.navbar-search select {
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #333;
+}
+
+.navbar-search button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-search button:hover {
+  background-color: #006400;
+  color: white;
+}
+
+
+.avaliacoes-container {
+  padding: 2rem;
+  background-color: #f5f5dc;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.poster-centralizado {
+  display: block;
+  margin: 0 auto 1rem;
+  width: 185px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.centralizado {
+  text-align: center;
+}
+
+.avaliacao-estrelas {
+  font-size: 24px;
+  margin: 10px 0;
+  color: gray;
+}
+
+.avaliacao-estrelas .selected {
+  color: gold;
+}
+
+.card {
+  background-color: #fff8dc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+}
+
+.cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.mensagem-central {
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+  margin-top: 50px;
+}
+
+.sinopse,
+.comentario-texto {
+  max-width: 100%;          /* evita overflow */
+  width: 100%;              /* ocupa toda a largura do container */
+  min-height: 4rem;         /* garante altura mínima uniforme */
+  text-align: justify;      /* opcional: distribui melhor as linhas */
+  line-height: 1.5;         /* melhora legibilidade */
+  word-wrap: break-word;    /* quebra palavras grandes */
+  display: block;
+}
+
+.mensagem-vazia{
+
+  font-family: 'Georgia', serif;
+  font-size: 20px;
+  color: #333;
+
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #fff8dc;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  text-align: left;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.modal-buttons button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #006400;
+  color: white;
+}
+
+.modal-buttons button:last-child {
+  background-color: #a9a9a9;
+}
+
+.feedback .modal-content {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+
+.feedback-modal-button{
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.feedback .modal-content.erro {
+  background-color: #f2dede;
+  color: #a94442;
+}
+
+.modal-content textarea {
+  width: 90%;
+  height: 100px;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 14px;
+  resize: none;
+  overflow-y: auto;
+}
+
+.avaliacao-estrelas span {
+  cursor: pointer;
+}

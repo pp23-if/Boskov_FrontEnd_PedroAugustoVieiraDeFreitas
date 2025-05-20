@@ -1,0 +1,81 @@
+<nav class="navbar">
+    <div class="navbar-user">{{ apelidoUsuario }}</div>
+    <div class="navbar-links">
+        <a routerLink="/cliente">Home</a>
+        <a routerLink="/cliente/meus-dados">Meus Dados</a>
+        <a routerLink="/cliente/minhas-avaliacoes">Minhas Avaliações</a>
+        <a routerLink="/cliente/outras-avaliacoes">Outras Avaliações</a>
+        <button (click)="logout()">Sair</button>
+    </div>
+</nav>
+
+<div class="avaliacoes-container">
+  <div *ngIf="!carregando && avaliacoes.length === 0" class="mensagem-vazia">
+    Você ainda não publicou nenhuma avaliação.
+  </div>
+
+  <div class="cards-wrapper" *ngIf="avaliacoes.length > 0">
+    <div class="card" *ngFor="let avaliacao of avaliacoes" (click)="abrirModal(avaliacao)">
+      
+      <!-- Poster -->
+      <img [src]="avaliacao.filme.poster" 
+           (error)="avaliacao.filme.poster = '/imagens/imagem-indisponivel.jpg'" 
+           alt="{{ avaliacao.filme.nome }}" />
+
+      <!-- Detalhes do Filme -->
+      <div class="card-content">
+        <h3>{{ avaliacao.filme.nome }}</h3>
+        <div class="film-details">
+          <p><strong>Classificação Indicativa:</strong> {{ avaliacao.filme.classificacao }}</p>
+          <p><strong>Data de Lançamento:</strong> {{ avaliacao.filme.ano_lancamento | date: 'dd/MM/yyyy' }}</p>
+          <p class="sinopse"><strong>Sinopse:</strong> {{ avaliacao.filme.sinopse }}</p>
+          <p><strong>Duração:</strong> {{ avaliacao.filme.duracao }} minutos</p>
+          <p><strong>Diretor:</strong> {{ avaliacao.filme.diretor }}</p>
+          <p><strong>Produtora:</strong> {{ avaliacao.filme.produtora }}</p>
+        </div>
+
+        <!-- Comentário do Usuário -->
+        <p class="comentario"><strong>Comentário:</strong></p>
+        <p>{{ avaliacao.comentario }}</p>
+
+        <!-- Estrelas -->
+        <div class="avaliacao-estrelas">
+          <span *ngFor="let star of [1,2,3,4,5]" [class.selected]="star <= avaliacao.nota">★</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Edição -->
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+    <h2>Editar Avaliação</h2>
+    
+    <label>Comentário:</label>
+    <textarea [(ngModel)]="comentarioEditado"></textarea>
+
+    <label>Nota:</label>
+    <div class="avaliacao-estrelas">
+      <span *ngFor="let star of [1,2,3,4,5]" 
+            (click)="notaEditada = star"
+            [class.selected]="star <= notaEditada">
+        ★
+      </span>
+    </div>
+
+    <div class="modal-buttons">
+      <button (click)="atualizarAvaliacao()">Confirmar</button>
+      <button (click)="fecharModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Feedback -->
+<div class="modal feedback" *ngIf="showFeedbackModal">
+  <div class="modal-content" [ngClass]="{ erro: feedbackErro }">
+    <p>{{ feedbackMensagem }}</p>
+    <button (click)="fecharFeedback()" class="feedback-modal-button">Fechar</button>
+  </div>
+</div>
+
