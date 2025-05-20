@@ -6,6 +6,7 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { AvaliacoesComponent } from './avaliacoes/avaliacoes.component';
 import { AdminComponent } from './admin/admin.component'; // Adicione este import, ajuste o caminho se necessário
 import { CadastroComponent } from './cadastro/cadastro.component'; // Adicione este import, ajuste o caminho se necessário
+import { DadosComponent } from './dados/dados.component';
 
 import { authGuard } from './services/auth.guard'; // ajuste o caminho se necessário
 
@@ -26,7 +27,7 @@ export const routes: Routes = [
   },
   {
     path: 'cliente/meus-dados',
-    component: ClienteComponent,
+    component: DadosComponent,
     canActivate: [authGuard]
   },
   {
@@ -45,6 +46,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  
 })
 export class AppRoutingModule {}

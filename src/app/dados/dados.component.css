@@ -1,0 +1,358 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff8dc;
+  color: black;
+  flex-wrap: wrap;
+}
+
+.navbar-user {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-links a,
+.navbar-links button {
+  text-decoration: none;
+  color: #006400;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+.navbar-links a:hover,
+.navbar-links button:hover {
+  text-decoration: underline;
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.navbar-search input,
+.navbar-search select {
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #333;
+}
+
+.navbar-search button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-search button:hover {
+  background-color: #006400;
+  color: white;
+}
+
+/* ... o restante do seu CSS continua igual ... */
+
+.filmes-container {
+  padding: 2rem;
+  background-color: #f5f5dc;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: #fff8dc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card img {
+  width: 185px;
+  height: auto;
+  align-self: center;
+}
+
+.card-content {
+  padding: 1rem;
+  flex-grow: 1;
+}
+
+.card-content h3,
+.card-content p {
+  margin: 0.5rem 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paginacao {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.paginacao button {
+  background-color: #90ee90;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.paginacao button.active {
+  background-color: #006400;
+  color: white;
+}
+
+/* Modal */
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal-content {
+  background-color: #fff8dc;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: red;
+}
+
+.modal-poster {
+  width: 184px;  /* Tamanho igual ao do card */
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.film-details p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.avaliacao span {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.avaliacao .selected {
+  color: gold;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #006400;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-buttons button:hover {
+  background-color: #004d00;
+}
+
+textarea {
+  width: 70%;
+  padding: 10px;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  color: #333;
+}
+
+textarea[readonly] {
+  background-color: #e8e8e8;
+  color: #777;
+  border-color: #bbb;
+}
+
+
+/* Modal interno de feedback */
+.modal-feedback-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  font-family: 'Georgia', serif;
+}
+
+.modal-feedback-box {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  max-width: 300px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.modal-feedback-box p {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.modal-feedback-box button {
+   margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #55da55;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.dados-container {
+  padding: 2rem;
+  background-color: #f5f5dc;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dados-card {
+  background-color: #fff8dc;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.user-icon {
+  font-size: 80px;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
+  background-color: #006400;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button[type="submit"]:hover {
+  background-color: #004d00;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #333;
+  font-family: 'Georgia', serif;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #006400;
+  box-shadow: 0 0 5px rgba(0, 100, 0, 0.5);
+}
+
+form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-family: 'Georgia', serif;
+}
