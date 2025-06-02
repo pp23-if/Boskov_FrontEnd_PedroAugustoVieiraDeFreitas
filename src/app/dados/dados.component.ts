@@ -3,13 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-dados',
   standalone: true,
   templateUrl: './dados.component.html',
   styleUrls: ['./dados.component.css'],
-  imports: [CommonModule, FormsModule, RouterModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    NgxMaskDirective
+  ],
+  providers: [provideNgxMask()]
 })
 export class DadosComponent implements OnInit {
   usuario: any = {
@@ -24,7 +31,7 @@ export class DadosComponent implements OnInit {
   modalErroAberto: boolean = false;
   feedbackMensagem: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.carregarDadosUsuario();
@@ -43,6 +50,7 @@ export class DadosComponent implements OnInit {
   }
 
   atualizarDados(): void {
+
     if (!this.usuario.nome || !this.usuario.email || !this.usuario.apelido || !this.usuario.data_nascimento) {
       this.feedbackMensagem = 'Todos os campos são obrigatórios.';
       this.modalErroAberto = true;
@@ -72,7 +80,7 @@ export class DadosComponent implements OnInit {
 
         // Atualiza localStorage com os dados retornados pela API
         localStorage.setItem('usuario', JSON.stringify(response.usuario));
-        
+
         // Recarrega os dados com base nos dados atualizados
         this.carregarDadosUsuario();
       },
@@ -94,12 +102,13 @@ export class DadosComponent implements OnInit {
   }
 
   converterDataParaPtBr(data: string): string {
-    const date = new Date(data);
-    const dia = String(date.getDate()).padStart(2, '0');
-    const mes = String(date.getMonth() + 1).padStart(2, '0');
-    const ano = date.getFullYear();
+    if (!data) return '';
+
+    const apenasData = data.split('T')[0]; // '2004-10-12'
+    const [ano, mes, dia] = apenasData.split('-');
     return `${dia}/${mes}/${ano}`;
   }
+
 
   fecharModalSucesso(): void {
     this.modalSucessoAberto = false;
@@ -109,12 +118,10 @@ export class DadosComponent implements OnInit {
     this.modalErroAberto = false;
   }
 
-   logout() {
+  logout() {
     localStorage.clear();
     sessionStorage.clear();
     localStorage.setItem('logout-event', Date.now().toString());
     window.location.href = '/login';
   }
 }
-
-
