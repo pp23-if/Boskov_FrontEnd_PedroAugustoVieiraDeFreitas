@@ -1,0 +1,45 @@
+<nav class="navbar">
+  <div class="navbar-user">{{ apelidoUsuario }}</div>
+  <div class="navbar-links">
+    <a routerLink="/cliente">Home</a>
+    <a routerLink="/cliente/meus-dados">Meus Dados</a>
+    <a routerLink="/cliente/minhas-avaliacoes">Minhas Avaliações</a>
+    <a routerLink="/cliente/outras-avaliacoes">Outras Avaliações</a>
+    <button (click)="logout()">Sair</button>
+  </div>
+</nav>
+
+<div class="usuarios-container">
+  <div class="card-usuario" *ngFor="let usuario of usuarios" (click)="abrirModal(usuario)">
+    <img src="/imagens/3135715.png" alt="Ícone de Usuário" />
+    <p>{{ usuario.apelido }}</p>
+  </div>
+</div>
+
+<!-- Modal com avaliações de outro usuário -->
+<div class="modal" *ngIf="showModal">
+ <div class="modal-content modal-scroll">
+  <button class="close-button" (click)="fecharModal()">✖</button>
+  <div *ngIf="avaliacoesSelecionadas.length === 0" class="mensagem-vazia">
+    Esse usuário ainda não publicou nenhuma avaliação.
+  </div>
+    <div *ngFor="let avaliacao of avaliacoesSelecionadas" class="card-avaliacao-externa">
+      <img [src]="avaliacao.filme.poster" alt="{{ avaliacao.filme.nome }}" />
+      <div class="avaliacao-info">
+        <h3>{{ avaliacao.filme.nome }}</h3>
+        <p><strong>Classificação:</strong> {{ avaliacao.filme.classificacao }}</p>
+        <p><strong>Lançamento:</strong> {{ avaliacao.filme.ano_lancamento | date:'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="sinopse">{{ avaliacao.filme.sinopse }}</div>
+      <div class="dados-centrais">
+        <p><strong>Duração:</strong> {{ avaliacao.filme.duracao }} min</p>
+        <p><strong>Diretor:</strong> {{ avaliacao.filme.diretor }}</p>
+        <p><strong>Produtora:</strong> {{ avaliacao.filme.produtora }}</p>
+        <p><strong>Comentário:</strong> {{ avaliacao.comentario }}</p>
+        <div class="avaliacao-estrelas">
+          <span *ngFor="let star of [1,2,3,4,5]" [class.selected]="star <= avaliacao.nota">★</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

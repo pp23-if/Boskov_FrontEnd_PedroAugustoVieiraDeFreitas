@@ -7,6 +7,7 @@ import { AvaliacoesComponent } from './avaliacoes/avaliacoes.component';
 import { AdminComponent } from './admin/admin.component'; // Adicione este import, ajuste o caminho se necessário
 import { CadastroComponent } from './cadastro/cadastro.component'; // Adicione este import, ajuste o caminho se necessário
 import { DadosComponent } from './dados/dados.component';
+import { OutrasAvaliacoesComponent } from './outras-avaliacoes/outras-avaliacoes.component';
 
 import { authGuard } from './services/auth.guard'; // ajuste o caminho se necessário
 
@@ -32,7 +33,7 @@ export const routes: Routes = [
   },
   {
     path: 'cliente/outras-avaliacoes',
-    component: ClienteComponent,
+    component: OutrasAvaliacoesComponent,
     canActivate: [authGuard]
   },
   {

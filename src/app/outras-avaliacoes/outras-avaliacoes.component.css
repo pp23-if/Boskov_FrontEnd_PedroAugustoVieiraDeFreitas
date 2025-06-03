@@ -110,7 +110,7 @@
 
 .cards-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
 }
 
@@ -123,21 +123,13 @@
 
 .sinopse,
 .comentario-texto {
-  max-width: 100%;          /* evita overflow */
-  width: 100%;              /* ocupa toda a largura do container */
-  min-height: 4rem;         /* garante altura mínima uniforme */
-  text-align: justify;      /* opcional: distribui melhor as linhas */
-  line-height: 1.5;         /* melhora legibilidade */
-  word-wrap: break-word;    /* quebra palavras grandes */
+  max-width: 100%;          
+  width: 100%;             
+  min-height: 4rem;        
+  text-align: justify;      
+  line-height: 1.5;        
+  word-wrap: break-word;
   display: block;
-}
-
-.mensagem-vazia{
-
-  font-family: 'Georgia', serif;
-  font-size: 20px;
-  color: #333;
-
 }
 
 .modal {
@@ -154,7 +146,7 @@
 }
 
 .modal-content {
-  background-color: #fff8dc;
+  background-color: #dfd4a9;
   padding: 2rem;
   border-radius: 10px;
   width: 90%;
@@ -222,4 +214,134 @@
 
 .avaliacao-estrelas span {
   cursor: pointer;
+}
+
+.usuarios-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f5f5dc;
+  min-height: 100vh;
+}
+
+.card-usuario {
+  background-color: #fff8dc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 500px;
+  text-align: center;
+  padding: 1rem;
+  cursor: pointer;
+  word-wrap: break-word;
+}
+
+.card-usuario img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.5rem;
+}
+
+.card-usuario p {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  white-space: normal;
+  word-break: break-word;
+}
+/* Modal de avaliações externas */
+.modal-content.modal-scroll {
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-button {
+  position: sticky;
+  float: right;
+  top: 0;
+  right: 0;
+  margin-left: auto;
+  margin-bottom: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #a00;
+}
+
+
+.card-avaliacao-externa {
+  background-color: #fff8dc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-avaliacao-externa img {
+  width: 185px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.avaliacao-info {
+  text-align: left;
+  margin-top: 0.5rem;
+}
+
+.sinopse {
+  text-align: justify;
+  margin-top: 0.5rem;
+  font-family: 'Georgia', serif;
+}
+
+.dados-centrais {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.avaliacao-estrelas {
+  font-size: 24px;
+  color: gray;
+}
+
+.avaliacao-estrelas .selected {
+  color: gold;
+}
+
+.mensagem-vazia {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  margin: 2rem 0;
+  font-family: 'Georgia', serif;
+}
+
+
+.modal-scroll::-webkit-scrollbar {
+  width: 6px; /* barra fina */
+}
+
+.modal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-scroll::-webkit-scrollbar-thumb {
+  background-color: #8B4513;
+  border-radius: 10px;
+  border: none;
+}
+
+.modal-scroll::-webkit-scrollbar-button {
+  display: none;
+}
+
+.modal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #74523a transparent;
 }
